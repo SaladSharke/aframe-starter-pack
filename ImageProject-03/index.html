@@ -4,12 +4,38 @@
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"> </script>
   </head>
   <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+    <a-scene fog="type: exponential; color: #303234; density: 0.00022">
+        <a-assets>
+          
+          <!-- Allocating model and image/texture assets -->
+          <a-asset-item id="frigate" src="assets/halo_frigate.glb"></a-asset-item>
+          <a-asset-item id="tower" src="assets/halo_forerunner.glb"></a-asset-item>
+          <a-asset-item id="mountain" src="assets/halo_mountain.glb"></a-asset-item>
+          <img id="sky1" src="assets/space_sky.jpg">
+          <img id="grass" src="assets/halo_grass.jpg"> <!-- disused ground texture -->
+          <img id="moon" src="assets/halo_moon.jpg">
+          <a-entity sound="src: url(assets/halo_song.mp3); autoplay: true; loop: false; positional: false; volume= 0.25"></a-entity>
+
+        </a-assets>
+      <!-- Ship and Towers (Scene) -->
+      <a-entity gltf-model="#frigate" position="0 300 -200" scale="1 1 1" rotation="0 -15 0"></a-entity> <!-- Close Frigate -->
+      <!-- <a-entity gltf-model="#frigate" position="0 1500 2000" scale="1 1 1" rotation="0 65 0"></a-entity> --> <!-- Far Frigate -->
+      <a-entity gltf-model="#frigate" position="0 1500 2000" rotation="0 65 0" animation="property: position; to: 5438 1500 -4000; dur: 250000; easing: linear"></a-entity> <!-- Far Frigate Animated -->
+      <a-entity gltf-model="#tower" position="90 0 -40" scale="4 4 4" rotation="0 65 0"></a-entity>
+      <a-entity gltf-model="#tower" position="-140 0 170" scale="4 4 4" rotation="0 40 0"></a-entity>
+
+      <!-- Background (Environment) -->
+      <a-entity gltf-model="#mountain" position="-1000 -30 -4000" scale="4 4 4" rotation="0 -10 0"></a-entity>
+      <a-entity gltf-model="#mountain" position="2000 -30 -4000" scale="4 4 4" rotation="0 60 0"></a-entity>
+      <a-entity gltf-model="#mountain" position="2000 -30 4000" scale="4 4 4" rotation="0 60 0"></a-entity>
+
+      <!-- Sky and Floor (Environment) -->
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="400" height="400" material="src: #moon; repeat: 50 50; color: #888888"></a-plane>
+      <a-sky src="#sky1" radius="6000" rotation="45 90 0"></a-sky>
+      <a-sphere position="-250 300 500" radius="20" material="color: #FFFFFF; emissive: #FFFFFF; emissiveIntensity: 20"></a-sphere> <!-- Star -->
     </a-scene>
   </body>
 </html>
+          <!-- I made a scene with a frigate model someone else made that I been redoing myself and some other
+           halo assets as for some reasonn thats my current obsession. I also tried to experiment with
+           fog and distant terrain in this scene. -->
